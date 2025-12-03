@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -100,7 +101,8 @@ const App: React.FC = () => {
     setView(AppView.QUIZ_LOADING);
 
     try {
-      const questions = await generateQuizQuestions(selectedCategory.queryTopic, config);
+      // OFFLINE MODE: Passa o ID da categoria e a config (slider)
+      const questions = await generateQuizQuestions(selectedCategory.id, config);
       setQuizQuestions(questions);
       setView(AppView.QUIZ_PLAYING);
     } catch (e) {
@@ -146,8 +148,8 @@ const App: React.FC = () => {
         return (
           <div className="fixed inset-0 z-50 bg-black flex flex-col items-center justify-center">
             <div className="w-16 h-16 border-4 border-[#E50914] border-t-transparent rounded-full animate-spin mb-4"></div>
-            <p className="text-[#E50914] font-bold text-lg animate-pulse tracking-widest">GERANDO DESAFIO...</p>
-            <p className="text-gray-500 text-sm mt-2">Consultando as Escrituras</p>
+            <p className="text-[#E50914] font-bold text-lg animate-pulse tracking-widest">PREPARANDO DESAFIO...</p>
+            <p className="text-gray-500 text-sm mt-2">Acessando Banco de Dados Offline</p>
           </div>
         );
 
@@ -307,7 +309,7 @@ const App: React.FC = () => {
             {/* Footer */}
             <footer className="py-12 px-12 text-gray-500 text-sm text-center">
               <p className="mb-4">BIBLIX - Competição Bíblica</p>
-              <p>© 2024 Powered by Gemini AI</p>
+              <p>© 2024 BIBLIX Offline</p>
             </footer>
           </>
         );
